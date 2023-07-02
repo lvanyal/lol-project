@@ -1,20 +1,20 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
 
-  const lockedAmount = ethers.utils.parseEther("0.001");
+  const [deployer] = await ethers.getSigners();
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const LolContract = await ethers.getContractFactory("LolContract");
+  const lol = await LolContract.deploy('LolContract', 'LOL');
 
-  await lock.deployed();
-  
+  await lol.deployed();
 
   console.log(
-    `Lock with ${ethers.utils.formatEther(lockedAmount)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+    `LolContract deployed at address ${lol.address}`
   );
+
+  const transaction = await lol.mintMeme('https://lol.ai?template=1&text=loooooool');
+  await transaction.wait();
 }
 
 // We recommend this pattern to be able to use async/await everywhere

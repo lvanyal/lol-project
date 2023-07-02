@@ -9,21 +9,27 @@
             "cwd": "app",
             "request": "launch",
             "type": "dart",
-            "deviceId": "chrome"
+            "deviceId": "chrome",
+            "args": [
+                "-d",
+                "web-server"
+            ]
         },
         {
             "name": "app (profile mode)",
             "cwd": "app",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "deviceId": "chrome"
         },
         {
             "name": "app (release mode)",
             "cwd": "app",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "deviceId": "chrome"
         }
     ]
 }
