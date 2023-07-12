@@ -7,7 +7,9 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final MainRepository _repository;
 
-  HomeCubit(this._repository) : super(HomeInitial());
+  HomeCubit(this._repository) : super(HomeInitial()) {
+    _repository.fetchAll();
+  }
 
   void requestAccount() => _repository.requestAccount();
 }

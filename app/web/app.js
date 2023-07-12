@@ -11,6 +11,7 @@ window._initJsInterop = function (_bridge) {
   bridge = _bridge;
   bridge.sendFromDart = () => console.log("from dart");
   bridge.requestAccount = requestAccount;
+  bridge.fetchAll = fetchAll;
 };
 
 window.onload = function (e) {
@@ -84,4 +85,27 @@ async function setupContract() {
       await provider.getSigner()
     );
   }
+}
+
+async function fetchAll() {
+  const address = config[window.ethereum.networkVersion];
+  if (address) {
+    const readProvider = new ethers.JsonRpcProvider("http://127.0.0.1:8545/");
+    const readContract = new ethers.Contract(
+      address,
+      LolContract,
+      readProvider
+    );
+    let totalNumber = await readContract.totalSupply();
+    bridge.onTotalMemeCount(parseInt(totalNumber));
+  } else {
+    console.log("window.ethereum.networkVersion: null");
+  }
+  //   window.onNewEvent(
+  //     "CONTRACT_BALANCE",
+  //     safeStringify({
+  //       totalNftsValueUsd: totalNftsValueUsd,
+  //       totalSupply: totalSupply,
+  //     })
+  //   );
 }

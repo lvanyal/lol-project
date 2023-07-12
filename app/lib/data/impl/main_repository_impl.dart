@@ -11,4 +11,7 @@ class MainRepositoryImpl implements MainRepository {
 
   @override
   void requestAccount() => _bridge.requestAccount();
+  
+  @override
+  void fetchAll() => _bridge.fetchAll();
 }

@@ -13,8 +13,18 @@ class ChainChanged extends Event {
 }
 
 class AccountDisconected extends Event {}
+
 class MetamaskMissing extends Event {}
 
+class TotalMemeCount extends Event {
+  final int value;
+
+  TotalMemeCount({required this.value});
+
+  @override
+  String toString() {
+    return 'TotalMemeCount($value)';
+  }
+}
+
 sealed class Error extends Event {}
-
-

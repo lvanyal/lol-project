@@ -5,9 +5,12 @@ import 'package:lol_app/di/dependencies.dart';
 import 'package:lol_app/home/home_cubit.dart';
 import 'package:lol_app/home/home_screen.dart';
 
+Dependencies? _dependencies;
+
 void main() {
   final bridge = initJsInterop();
-  resolveDependencies(bridge);
+  _dependencies =
+      _dependencies ?? (Dependencies()..resolveDependencies(bridge));
   runApp(const LolApp());
 }
 

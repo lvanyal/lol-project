@@ -1,22 +1,16 @@
 import 'package:js/js.dart';
+import 'package:logger/logger.dart';
 import 'package:lol_app/domain/model/event.dart';
 import 'package:rxdart/rxdart.dart';
 
 final events = PublishSubject<Event>()
   ..stream.listen((event) {
-    print('event: ${event}');
+    Logger().d('event emitted: ${event.runtimeType} $event');
   });
 
 // The Dart class must have `@JSExport` on it or one of its instance members.
 @JSExport()
 class LolBridge {
-  int value = 0;
-  @JSExport()
-  void sendEvent(JSEvent? event) {
-    value++;
-    print('sendEvent ${event?.name}');
-  }
-
   @JSExport()
   void onAccountChanged(String accountId) {
     events.add(AccountChanged(accountId: accountId));
@@ -36,6 +30,11 @@ class LolBridge {
   void onMetamaskMissing() {
     events.add(MetamaskMissing());
   }
+
+  @JSExport()
+  void onTotalMemeCount(int count) {
+    events.add(TotalMemeCount(value: count));
+  }
 }
 
 @JS()
@@ -46,6 +45,7 @@ extension JSExt on JSLolBridge {
   external int value;
   external void sendFromDart();
   external void requestAccount();
+  external void fetchAll();
 }
 
 @JS()
