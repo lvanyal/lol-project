@@ -98,14 +98,11 @@ async function fetchAll() {
     );
     let totalNumber = await readContract.totalSupply();
     bridge.onTotalMemeCount(parseInt(totalNumber));
-  } else {
-    console.log("window.ethereum.networkVersion: null");
+
+    for (let i = 0; i < totalNumber; i++) {
+      let memeId = await readContract.tokenByIndex(i);
+      let memeUri = await readContract.tokenURI(memeId);
+      bridge.onMemeFetched(parseInt(totalNumber), { id: memeId, uri: memeUri });
+    }
   }
-  //   window.onNewEvent(
-  //     "CONTRACT_BALANCE",
-  //     safeStringify({
-  //       totalNftsValueUsd: totalNftsValueUsd,
-  //       totalSupply: totalSupply,
-  //     })
-  //   );
 }

@@ -1,3 +1,5 @@
+import 'package:lol_app/domain/model/meme.dart';
+
 sealed class Event {}
 
 class AccountChanged extends Event {
@@ -24,6 +26,18 @@ class TotalMemeCount extends Event {
   @override
   String toString() {
     return 'TotalMemeCount($value)';
+  }
+}
+
+class MemeFetched extends Event {
+  final int totalMemes;
+  final Meme meme;
+
+  MemeFetched({required this.totalMemes, required this.meme});
+
+  @override
+  String toString() {
+    return meme.toString();
   }
 }
 

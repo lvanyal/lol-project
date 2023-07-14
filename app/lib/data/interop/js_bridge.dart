@@ -1,6 +1,7 @@
 import 'package:js/js.dart';
 import 'package:logger/logger.dart';
 import 'package:lol_app/domain/model/event.dart';
+import 'package:lol_app/domain/model/meme.dart';
 import 'package:rxdart/rxdart.dart';
 
 final events = PublishSubject<Event>()
@@ -35,6 +36,16 @@ class LolBridge {
   void onTotalMemeCount(int count) {
     events.add(TotalMemeCount(value: count));
   }
+
+  @JSExport()
+  void onMemeFetched(int totalMemes, JSMeme meme) {
+    events.add(
+      MemeFetched(
+        totalMemes: totalMemes,
+        meme: Meme(id: meme.id, uri: meme.uri),
+      ),
+    );
+  }
 }
 
 @JS()
@@ -50,10 +61,10 @@ extension JSExt on JSLolBridge {
 
 @JS()
 @anonymous
-class JSEvent {
-  external String get name;
-  external String get payload;
+class JSMeme {
+  external String get id;
+  external String get uri;
 
   // Must have an unnamed factory constructor with named arguments.
-  external factory JSEvent({String name, String payload});
+  external factory JSMeme({String id, String uri});
 }

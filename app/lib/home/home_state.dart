@@ -1,6 +1,13 @@
-part of 'home_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+import 'package:lol_app/domain/model/meme.dart';
 
-@immutable
-abstract class HomeState {}
+part 'home_state.freezed.dart';
 
-class HomeInitial extends HomeState {}
+@freezed
+abstract class HomeState with _$HomeState {
+  const factory HomeState.loading() = _HomeLoading;
+  const factory HomeState.loaded(
+      {required int totalMemeAmount,
+      required List<Meme> loadedMemes}) = _HomeLoaded;
+}
