@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lol_app/home/home_cubit.dart';
-import 'package:lol_app/home/home_state.dart';
-import 'package:lol_app/home/widget/meme_widget.dart';
-import 'package:lol_app/meme_details/meme_details_screen.dart';
+import 'package:lol_app/screens/home/home_cubit.dart';
+import 'package:lol_app/screens/home/home_state.dart';
+import 'package:lol_app/widget/meme_widget.dart';
+import 'package:lol_app/screens/meme_details/meme_details_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,19 +35,21 @@ class HomeScreen extends StatelessWidget {
       ResponsiveBreakpointsData() => 5
     };
 
+    final double gridPadding = (MediaQuery.of(context).size.width / 16);
+
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return state.map(
-            loading: (_) => const SliverToBoxAdapter(
+            loading: (_) => SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(64),
-                    child: Center(
+                    padding: EdgeInsets.all(gridPadding),
+                    child: const Center(
                       child: CircularProgressIndicator(),
                     ),
                   ),
                 ),
             loaded: (loaded) => SliverPadding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(gridPadding),
                   sliver: SliverGrid.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: 8,

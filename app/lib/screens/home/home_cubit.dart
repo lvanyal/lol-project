@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:lol_app/domain/model/event.dart';
 import 'package:lol_app/domain/repository/main_repository.dart';
-import 'package:lol_app/home/home_state.dart';
+import 'package:lol_app/screens/home/home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final MainRepository _repository;
@@ -28,12 +28,15 @@ class HomeCubit extends Cubit<HomeState> {
       case MemeFetched():
         _onNewMemeFetched(event);
         break;
+      case AccountChanged():
+        _onAccountChanged(event.accountId);
+        break;
       default:
         break;
     }
   }
 
-  _onNewMemeFetched(MemeFetched event) {
+  void _onNewMemeFetched(MemeFetched event) {
     final HomeState newState = state.map(
         loading: (_) => HomeState.loaded(
               loadedMemes: [event.meme],
@@ -47,5 +50,15 @@ class HomeCubit extends Cubit<HomeState> {
             ));
 
     emit(newState);
+  }
+
+  void _onAccountChanged(String accountId) {
+    final HomeState? newState = state.mapOrNull(
+        loaded: (loaded) => loaded.copyWith(
+              accountId: accountId,
+            ));
+    if (newState != null) {
+      emit(newState);
+    }
   }
 }

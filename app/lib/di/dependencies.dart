@@ -3,7 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:lol_app/data/impl/main_repository_impl.dart';
 import 'package:lol_app/data/interop/js_bridge.dart';
 import 'package:lol_app/domain/repository/main_repository.dart';
-import 'package:lol_app/home/home_cubit.dart';
+import 'package:lol_app/screens/home/home_cubit.dart';
 
 final getIt = GetIt.instance;
 
