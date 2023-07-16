@@ -10,40 +10,77 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) => SliverAppBar(
-        floating: true,
-        toolbarHeight: 64,
-        shadowColor: Colors.black,
-        backgroundColor: Colors.white,
-        title: Text(
-          'looool',
-          style: GoogleFonts.rubikDirt().copyWith(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 32,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
+      builder: (context, state) {
+        final accountId = state.mapOrNull(
+          loaded: (value) => value.accountId,
+        );
+
+        return SliverAppBar(
+          floating: true,
+          toolbarHeight: 64,
+          shadowColor: Colors.black,
+          backgroundColor: Colors.white,
+          title: Text(
+            'looool',
+            style: GoogleFonts.rubikDirt().copyWith(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 32,
             ),
-            child: switch (state) {
-              HomeLoaded loaded when loaded.accountId == null => ElevatedButton(
-                  onPressed: () => context.read<HomeCubit>().requestAccount(),
-                  style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-                  child: const Text('CONNECT WALLET'),
-                ),
-              HomeLoaded loaded when loaded.accountId != null =>
-                Text(state.accountId ?? ''),
-              HomeState() => Container(),
-            },
           ),
-        ],
-        forceElevated: true,
-        elevation: 4,
-      ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: OutlinedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+                child: Text(
+                  'CREATE MEME',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.montserrat().copyWith(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.only(
+                  top: 8,
+                  bottom: 8,
+                  right: MediaQuery.of(context).size.width / 16,
+                ),
+                child: (accountId != null)
+                    ? Container(
+                        alignment: AlignmentDirectional.center,
+                        width: 220,
+                        child: Text(
+                          accountId,
+                          maxLines: 1,
+                          style: GoogleFonts.montserrat().copyWith(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      )
+                    : ElevatedButton(
+                        onPressed: () =>
+                            context.read<HomeCubit>().requestAccount(),
+                        style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder()),
+                        child: Text('CONNECT WALLET',
+                            style: GoogleFonts.montserrat().copyWith(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      )),
+          ],
+          forceElevated: true,
+          elevation: 4,
+        );
+      },
     );
   }
 }

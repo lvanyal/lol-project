@@ -33,7 +33,7 @@ const handleAccountsChanged = async (accounts) => {
     await setupContract();
     const chainId = parseInt(window.ethereum.networkVersion);
     bridge.onAccountChanged(accounts[0]);
-    bridge.onChainChanged(chainId[0]);
+    bridge.onChainChanged(chainId);
   } else {
     bridge.onAccountDisconnected();
   }

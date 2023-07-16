@@ -6,6 +6,11 @@ class AccountChanged extends Event {
   final String accountId;
 
   AccountChanged({required this.accountId});
+
+  @override
+  String toString() {
+    return 'AccountChanged($accountId)';
+  }
 }
 
 class ChainChanged extends Event {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lol_app/domain/model/meme.dart';
-import 'package:lol_app/screens/home/widget/meme_widget.dart';
+import 'package:lol_app/widget/meme_widget.dart';
 
 class MemeDetailsScreen extends StatelessWidget {
   final Meme meme;
