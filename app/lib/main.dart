@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:lol_app/data/interop/interop_initialiser.dart';
 import 'package:lol_app/di/dependencies.dart';
+import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
 import 'package:lol_app/screens/home/home_cubit.dart';
 import 'package:lol_app/screens/home/home_screen.dart';
 import 'package:lol_app/utils/cutom_scroll_behavior.dart';
@@ -27,8 +28,11 @@ void main() {
   runApp(
     MaterialApp(
       scrollBehavior: CustomScrollBehavior(),
-      home: ResponsiveWrapper(
-        child: CreateMemeScreen(),
+      home: BlocProvider(
+        create: (_) => getIt<CreateMemeBloc>(),
+        child: const ResponsiveWrapper(
+          child: CreateMemeScreen(),
+        ),
       ),
     ),
   );

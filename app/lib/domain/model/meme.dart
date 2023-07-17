@@ -1,11 +1,13 @@
-final class Meme {
-  final String id;
-  final String uri;
+import 'package:lol_app/domain/model/meme_template.dart';
 
-  Meme({required this.id, required this.uri});
+class Meme {
+  final MemeTemplate template;
+  final List<String> texts;
+  String? id;
 
-  @override
-  String toString() {
-    return 'Meme(id: $id, uri: $uri)';
-  }
+  Meme({
+    required this.template,
+    required this.texts,
+    this.id,
+  });
 }

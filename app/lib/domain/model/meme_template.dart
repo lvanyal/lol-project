@@ -2,7 +2,7 @@ enum MemeTemplate {
   loool(
       name: 'lo0000l',
       fileName: 'template_0.png',
-      textsNumber: 1,
+      textsCount: 1,
       textColor: TextColor.dark,
       textLocations: [
         TextLocation.bottomCenter,
@@ -10,7 +10,7 @@ enum MemeTemplate {
   notSimply(
       name: 'One Does Not Simply',
       fileName: 'template_1.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.light,
       textLocations: [
         TextLocation.topCenter,
@@ -19,7 +19,7 @@ enum MemeTemplate {
   catYellingWomen(
       name: 'Woman Yelling At Cat',
       fileName: 'cat_women.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.dark,
       textLocations: [
         TextLocation.topRight,
@@ -28,7 +28,7 @@ enum MemeTemplate {
   thinkAboutIt(
       name: 'Think about it',
       fileName: 'think_about_it.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.light,
       textLocations: [
         TextLocation.topCenter,
@@ -38,7 +38,7 @@ enum MemeTemplate {
   skepticalKid(
       name: 'Skeptical Kid',
       fileName: 'skeptical_kid.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.light,
       textLocations: [
         TextLocation.topCenter,
@@ -47,7 +47,7 @@ enum MemeTemplate {
   fry(
       name: 'Futurama Fry',
       fileName: 'fry.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.light,
       textLocations: [
         TextLocation.topCenter,
@@ -56,7 +56,7 @@ enum MemeTemplate {
   waitingSkeleton(
       name: 'Waiting skeleton',
       fileName: 'waiting_skeleton.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.light,
       textLocations: [
         TextLocation.topCenter,
@@ -65,7 +65,7 @@ enum MemeTemplate {
   laughingLeo(
       name: 'Laughing Leo',
       fileName: 'laughing_leo.png',
-      textsNumber: 2,
+      textsCount: 2,
       textColor: TextColor.light,
       textLocations: [
         TextLocation.topCenter,
@@ -75,13 +75,13 @@ enum MemeTemplate {
   const MemeTemplate({
     required this.name,
     required this.fileName,
-    required this.textsNumber,
+    required this.textsCount,
     required this.textColor,
     required this.textLocations,
   });
   final String name;
   final String fileName;
-  final int textsNumber;
+  final int textsCount;
   final TextColor textColor;
   final List<TextLocation> textLocations;
 }

@@ -1,7 +1,7 @@
 import 'package:js/js.dart';
 import 'package:logger/logger.dart';
 import 'package:lol_app/domain/model/event.dart';
-import 'package:lol_app/domain/model/meme.dart';
+import 'package:lol_app/domain/model/blockchain_meme.dart';
 import 'package:rxdart/rxdart.dart';
 
 final events = PublishSubject<Event>()
@@ -42,7 +42,7 @@ class LolBridge {
     events.add(
       MemeFetched(
         totalMemes: totalMemes,
-        meme: Meme(id: meme.id, uri: meme.uri),
+        meme: BlockchainMeme(id: meme.id, uri: meme.uri),
       ),
     );
   }

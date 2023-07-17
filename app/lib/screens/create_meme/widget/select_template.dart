@@ -1,7 +1,8 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
+import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
 
 class SelectTemplate extends StatelessWidget {
   const SelectTemplate({super.key});
@@ -22,7 +23,11 @@ class SelectTemplate extends StatelessWidget {
             itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.read<CreateMemeBloc>().add(TemplateSelected(
+                            memeTemplate: MemeTemplate.values[index],
+                          ));
+                    },
                     child: SizedBox.square(
                       dimension: 120,
                       child: Image.asset(

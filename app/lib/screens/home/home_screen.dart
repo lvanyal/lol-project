@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lol_app/domain/model/meme.dart';
+import 'package:lol_app/domain/model/meme_template.dart';
 import 'package:lol_app/screens/home/home_cubit.dart';
 import 'package:lol_app/screens/home/home_state.dart';
 import 'package:lol_app/widget/meme_widget.dart';
@@ -61,6 +63,8 @@ class HomeScreen extends StatelessWidget {
                       //TODO: loaded.loadedMemes[index]
                       tag: 'meme$index',
                       child: MemeWidget(
+                        meme: Meme(
+                            template: MemeTemplate.loool, texts: ['Looooool']),
                         onTap: () {
                           Navigator.of(context).push(
                             PageRouteBuilder(

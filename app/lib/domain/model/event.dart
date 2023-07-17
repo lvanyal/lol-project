@@ -1,4 +1,4 @@
-import 'package:lol_app/domain/model/meme.dart';
+import 'package:lol_app/domain/model/blockchain_meme.dart';
 
 sealed class Event {}
 
@@ -36,7 +36,7 @@ class TotalMemeCount extends Event {
 
 class MemeFetched extends Event {
   final int totalMemes;
-  final Meme meme;
+  final BlockchainMeme meme;
 
   MemeFetched({required this.totalMemes, required this.meme});
 
