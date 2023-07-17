@@ -10,30 +10,28 @@ class MemePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreateMemeBloc, CreateMemeState>(
-      builder: (BuildContext context, state) => AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
-        transitionBuilder: (Widget child, Animation<double> animation) {
-          return ScaleTransition(scale: animation, child: child);
-        },
-        child: Card(
-            key: ObjectKey(state.selectedTemplate),
-            clipBehavior: Clip.antiAlias,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Container(
-              alignment: AlignmentDirectional.topCenter,
-              // height: 400,
-              // decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
-              width: 400,
+      builder: (BuildContext context, state) => Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Container(
+            alignment: AlignmentDirectional.topCenter,
+            width: 400,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
               child: MemeWidget(
+                key: ObjectKey(state.selectedTemplate),
                 meme: Meme(
                   template: state.selectedTemplate,
                   texts: state.texts,
                 ),
               ),
-            )),
-      ),
+            ),
+          )),
     );
   }
 }

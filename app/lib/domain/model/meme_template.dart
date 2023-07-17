@@ -84,6 +84,8 @@ enum MemeTemplate {
   final int textsCount;
   final TextColor textColor;
   final List<TextLocation> textLocations;
+
+  static const maxTextsCount = 10;
 }
 
 enum TextColor { dark, light }

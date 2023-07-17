@@ -2,10 +2,43 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lol_app/domain/model/meme_template.dart';
 import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
 
-class InputText extends StatelessWidget {
+class InputText extends StatefulWidget {
   const InputText({super.key});
+
+  @override
+  State<InputText> createState() => _InputTextState();
+}
+
+class _InputTextState extends State<InputText> {
+  final List<TextEditingController> _textControllers = List.generate(
+    MemeTemplate.maxTextsCount,
+    (index) => TextEditingController(),
+  ); // Hope 10 controllers whould be enough:)
+
+  @override
+  void initState() {
+    for (var i = 0; i < _textControllers.length; i++) {
+      final controller = _textControllers[i];
+      controller.addListener(() {
+        final text = controller.text;
+        context
+            .read<CreateMemeBloc>()
+            .add(TextUpdated(textIndex: i, text: text));
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _textControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +57,10 @@ class InputText extends StatelessWidget {
                         i < state.selectedTemplate.textsCount;
                         i += 1) ...[
                       TextField(
+                        controller: _textControllers[i],
                         decoration: InputDecoration(
                           filled: false,
-                          hintText: "Text #${i}",
+                          hintText: "Text #$i",
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.outline),

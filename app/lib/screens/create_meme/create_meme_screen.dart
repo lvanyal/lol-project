@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,19 +35,7 @@ class CreateMemeScreen extends StatelessWidget {
                 SizedBox(
                   height: 16,
                 ),
-                ElevatedButton(
-                  onPressed: () =>
-                      context.read<CreateMemeBloc>().add(CreateMemePressed()),
-                  style: ElevatedButton.styleFrom(shape: StadiumBorder()),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                    child: Text('CREATE MEME',
-                        style: GoogleFonts.montserrat().copyWith(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                ),
+                MintMemeButton(),
                 SizedBox(
                   height: 16,
                 ),
@@ -74,20 +63,7 @@ class CreateMemeScreen extends StatelessWidget {
                               SizedBox(
                                 height: 16,
                               ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                    shape: const StadiumBorder()),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16, horizontal: 32),
-                                  child: Text('CREATE MEME',
-                                      style: GoogleFonts.montserrat().copyWith(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                ),
-                              )
+                              MintMemeButton(),
                             ],
                           )),
                         ],
@@ -96,6 +72,27 @@ class CreateMemeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+      ),
+    );
+  }
+}
+
+class MintMemeButton extends StatelessWidget {
+  const MintMemeButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+        child: AutoSizeText('MINT MEME',
+            maxLines: 1,
+            style: GoogleFonts.montserrat().copyWith(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            )),
       ),
     );
   }
