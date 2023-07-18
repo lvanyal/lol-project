@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
             loaded: (loaded) => Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: ResponsiveGridView.builder(
                     alignment: AlignmentDirectional.center,
                     itemCount: 16,

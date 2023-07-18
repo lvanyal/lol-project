@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,17 +32,6 @@ void main() {
       _dependencies ?? (Dependencies()..resolveDependencies(bridge));
   Bloc.observer = StateObserver(logger: getIt<Logger>());
 
-  // runApp(
-  //   MaterialApp(
-  //     home: BlocProvider(
-  //       create: (_) => getIt<CreateMemeBloc>(),
-  //       child: const ResponsiveWrapper(
-  //         child: CreateMemeScreen(),
-  //       ),
-  //     ),
-  //   ),
-  // );
-
   runApp(LolApp());
 }
 
@@ -63,6 +53,7 @@ class LolApp extends StatelessWidget {
         builder: (BuildContext context, GoRouterState state, Widget child) {
           return BlocProviders(
               child: TopBarWrapper(
+            location: state.location,
             child: child,
           ));
         },
@@ -89,11 +80,10 @@ class LolApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       scrollBehavior: CustomScrollBehavior(),
-      title: 'LOLAPP Beta',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        primaryColor: Colors.blueGrey,
-      ),
+      title: 'looool Beta',
+      theme: FlexThemeData.light(scheme: FlexScheme.mandyRed),
+      darkTheme: FlexThemeData.dark(scheme: FlexScheme.mandyRed),
+      themeMode: ThemeMode.system,
       routerConfig: _router,
     );
   }
