@@ -91,7 +91,7 @@ class TextPositioned extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textSpace = 16.0;
+    const textSpace = 10.0;
 
     final (top, bottom, left, right) = switch (textLocation) {
       TextLocation.topRight => (textSpace, null, null, textSpace),

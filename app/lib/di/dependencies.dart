@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
+import 'package:lol_app/data/converter/meme_converter.dart';
 import 'package:lol_app/data/impl/main_repository_impl.dart';
 import 'package:lol_app/data/interop/js_bridge.dart';
 import 'package:lol_app/domain/repository/main_repository.dart';
@@ -16,9 +17,13 @@ class Dependencies {
 
     /// data
     getIt.registerSingleton<MainRepository>(MainRepositoryImpl(bridge: bridge));
+    getIt.registerSingleton(MemeConverter());
 
     /// bloc
-    getIt.registerFactory(() => HomeCubit(getIt<MainRepository>()));
+    getIt.registerFactory(() => HomeCubit(
+          getIt<MainRepository>(),
+          getIt<MemeConverter>(),
+        ));
     getIt.registerFactory(() => CreateMemeBloc());
   }
 }

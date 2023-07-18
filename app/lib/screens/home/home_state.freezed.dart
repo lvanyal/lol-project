@@ -19,24 +19,24 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)
+    required TResult Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)?
+    TResult? Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)?
+    TResult Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -124,8 +124,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)
+    required TResult Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)
         loaded,
   }) {
     return loading();
@@ -135,8 +135,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)?
+    TResult? Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
   }) {
     return loading?.call();
@@ -146,8 +146,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)?
+    TResult Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
     required TResult orElse(),
   }) {
@@ -199,10 +199,7 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
           _$HomeLoaded value, $Res Function(_$HomeLoaded) then) =
       __$$HomeLoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String? accountId,
-      int totalMemeAmount,
-      List<BlockchainMeme> loadedMemes});
+  $Res call({String? accountId, int totalMemeAmount, List<Meme> loadedMemes});
 }
 
 /// @nodoc
@@ -232,7 +229,7 @@ class __$$HomeLoadedCopyWithImpl<$Res>
       loadedMemes: null == loadedMemes
           ? _value._loadedMemes
           : loadedMemes // ignore: cast_nullable_to_non_nullable
-              as List<BlockchainMeme>,
+              as List<Meme>,
     ));
   }
 }
@@ -243,16 +240,16 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   const _$HomeLoaded(
       {this.accountId,
       required this.totalMemeAmount,
-      required final List<BlockchainMeme> loadedMemes})
+      required final List<Meme> loadedMemes})
       : _loadedMemes = loadedMemes;
 
   @override
   final String? accountId;
   @override
   final int totalMemeAmount;
-  final List<BlockchainMeme> _loadedMemes;
+  final List<Meme> _loadedMemes;
   @override
-  List<BlockchainMeme> get loadedMemes {
+  List<Meme> get loadedMemes {
     if (_loadedMemes is EqualUnmodifiableListView) return _loadedMemes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_loadedMemes);
@@ -300,8 +297,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)
+    required TResult Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)
         loaded,
   }) {
     return loaded(accountId, totalMemeAmount, loadedMemes);
@@ -311,8 +308,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)?
+    TResult? Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
   }) {
     return loaded?.call(accountId, totalMemeAmount, loadedMemes);
@@ -322,8 +319,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String? accountId, int totalMemeAmount,
-            List<BlockchainMeme> loadedMemes)?
+    TResult Function(
+            String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
     required TResult orElse(),
   }) {
@@ -369,11 +366,11 @@ abstract class HomeLoaded implements HomeState {
   const factory HomeLoaded(
       {final String? accountId,
       required final int totalMemeAmount,
-      required final List<BlockchainMeme> loadedMemes}) = _$HomeLoaded;
+      required final List<Meme> loadedMemes}) = _$HomeLoaded;
 
   String? get accountId;
   int get totalMemeAmount;
-  List<BlockchainMeme> get loadedMemes;
+  List<Meme> get loadedMemes;
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
       throw _privateConstructorUsedError;

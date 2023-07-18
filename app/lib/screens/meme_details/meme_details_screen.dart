@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lol_app/domain/model/blockchain_meme.dart';
 import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
 import 'package:lol_app/widget/meme_widget.dart';
 
 class MemeDetailsScreen extends StatelessWidget {
-  final BlockchainMeme meme;
+  final Meme meme;
 
   const MemeDetailsScreen({super.key, required this.meme});
   @override

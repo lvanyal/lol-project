@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:lol_app/domain/model/blockchain_meme.dart';
+import 'package:lol_app/domain/model/meme.dart';
 
 part 'home_state.freezed.dart';
 
@@ -10,5 +10,5 @@ abstract class HomeState with _$HomeState {
   const factory HomeState.loaded(
       {String? accountId,
       required int totalMemeAmount,
-      required List<BlockchainMeme> loadedMemes}) = HomeLoaded;
+      required List<Meme> loadedMemes}) = HomeLoaded;
 }

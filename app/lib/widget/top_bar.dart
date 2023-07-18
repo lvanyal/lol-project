@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lol_app/screens/home/home_cubit.dart';
 import 'package:lol_app/screens/home/home_state.dart';
@@ -15,27 +16,29 @@ class TopBar extends StatelessWidget {
           loaded: (value) => value.accountId,
         );
 
-        return SliverAppBar(
-          floating: true,
+        return AppBar(
           toolbarHeight: 64,
           shadowColor: Colors.black,
           backgroundColor: Colors.white,
-          title: Text(
-            'looool',
-            style: GoogleFonts.rubikDirt().copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 32,
+          title: TextButton(
+            onPressed: () => context.go('/'),
+            child: Text(
+              'looool',
+              style: GoogleFonts.rubikDirt().copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 32,
+              ),
             ),
           ),
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () => context.go('/mint'),
                 style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
                 child: Text(
-                  'CREATE MEME',
+                  'MINT MEME',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat().copyWith(
                     fontSize: 22,
@@ -77,7 +80,6 @@ class TopBar extends StatelessWidget {
                             )),
                       )),
           ],
-          forceElevated: true,
           elevation: 4,
         );
       },

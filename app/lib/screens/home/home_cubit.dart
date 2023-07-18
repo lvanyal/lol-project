@@ -1,15 +1,20 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:lol_app/data/converter/meme_converter.dart';
+import 'package:lol_app/domain/model/blockchain_meme.dart';
 import 'package:lol_app/domain/model/event.dart';
+import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/domain/repository/main_repository.dart';
 import 'package:lol_app/screens/home/home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final MainRepository _repository;
+  final MemeConverter _memeConverter;
   StreamSubscription? _eventsSubscribtion;
 
-  HomeCubit(this._repository) : super(const HomeState.loading()) {
+  HomeCubit(this._repository, this._memeConverter)
+      : super(const HomeState.loading()) {
     _repository.fetchAll();
 
     _eventsSubscribtion = _repository.eventStream().listen(_onEvent);
@@ -37,15 +42,16 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void _onNewMemeFetched(MemeFetched event) {
+    final meme = _memeConverter.toDomain(event.meme);
     final HomeState newState = state.map(
         loading: (_) => HomeState.loaded(
-              loadedMemes: [event.meme],
+              loadedMemes: [meme],
               totalMemeAmount: event.totalMemes,
             ),
         loaded: (loaded) => loaded.copyWith(
               loadedMemes: [
                 ...loaded.loadedMemes,
-                event.meme,
+                meme,
               ],
             ));
 
