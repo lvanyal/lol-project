@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:equatable/equatable.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ import 'screens/create_meme/create_meme_screen.dart';
 Dependencies? _dependencies;
 
 void main() {
+  EquatableConfig.stringify = true;
   final bridge = initJsInterop();
   _dependencies =
       _dependencies ?? (Dependencies()..resolveDependencies(bridge));

@@ -2,6 +2,9 @@ import 'package:lol_app/domain/model/blockchain_meme.dart';
 import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
 
+const HOST = 'looool.ai';
+const SCHEME = 'app';
+
 class MemeConverter {
   static const uriTextDelimiter = '|';
   static const templateIndexParam = 't';
@@ -19,5 +22,14 @@ class MemeConverter {
     final template = MemeTemplate.values[templateIndex];
 
     return Meme(id: id, template: template, texts: textList);
+  }
+
+  BlockchainMeme toBlockchain(Meme meme) {
+    final uri = Uri(host: HOST, scheme: SCHEME, queryParameters: {
+      textParam: meme.texts.join(uriTextDelimiter),
+      templateIndexParam: MemeTemplate.values.indexOf(meme.template).toString(),
+    });
+
+    return BlockchainMeme(uri: uri.toString(), id: '');
   }
 }

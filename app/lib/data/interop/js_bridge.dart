@@ -57,6 +57,7 @@ extension JSExt on JSLolBridge {
   external void sendFromDart();
   external void requestAccount();
   external void fetchAll();
+  external void mintMeme(String uri);
 }
 
 @JS()

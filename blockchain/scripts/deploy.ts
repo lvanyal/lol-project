@@ -4,8 +4,12 @@ async function main() {
 
   const [deployer] = await ethers.getSigners();
 
+  console.log(
+    `LolContract deployer ${JSON.stringify(deployer)}`
+  );
+
   const LolContract = await ethers.getContractFactory("LolContract");
-  const lol = await LolContract.deploy('LolContract', 'LOL');
+  const lol = await LolContract.deploy('LolContract', 'LOL2');
 
   await lol.deployed();
 
@@ -15,6 +19,11 @@ async function main() {
 
   const transaction = await lol.mintMeme('https://lol.ai?template=1&text=loooooool');
   await transaction.wait();
+
+
+  console.log(
+    `LolContract meme minted`
+  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere

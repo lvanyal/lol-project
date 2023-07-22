@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lol_app/domain/model/meme.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
+import 'package:lol_app/widget/bordered_text.dart';
 
 class MemeWidget extends StatelessWidget {
   final Meme meme;
@@ -27,19 +28,23 @@ class MemeWidget extends StatelessWidget {
         ),
         onTap: onTap,
         child: Stack(children: [
-          Image.asset(
-            'templates/${meme.template.fileName}',
-            fit: BoxFit.contain,
+          Positioned.fill(
+            child: Image.asset(
+              'templates/${meme.template.fileName}',
+              fit: BoxFit.cover,
+            ),
           ),
           ...[
             for (var i = 0; i < meme.texts.length; i++)
               TextPositioned(
                 textLocation: meme.template.textLocations[i],
-                child: AutoSizeText(
-                  meme.texts[i],
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  style: _textStyle,
+                child: BorderedText(
+                  child: AutoSizeText(
+                    meme.texts[i],
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    style: _textStyle,
+                  ),
                 ),
               )
           ],
@@ -53,29 +58,8 @@ class MemeWidget extends StatelessWidget {
       fontSize: 64,
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      shadows: _textShadow,
+      // shadows: _textShadow,
     );
-  }
-
-  List<Shadow> get _textShadow {
-    return [
-      const Shadow(
-          // bottomLeft
-          offset: Offset(-2, -2),
-          color: Colors.black),
-      const Shadow(
-          // bottomRight
-          offset: Offset(2, -2),
-          color: Colors.black),
-      const Shadow(
-          // topRight
-          offset: Offset(2, 2),
-          color: Colors.black),
-      const Shadow(
-          // topLeft
-          offset: Offset(-2, 2),
-          color: Colors.black),
-    ];
   }
 }
 

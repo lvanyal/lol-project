@@ -33,8 +33,10 @@ class TopBar extends StatelessWidget {
                 )
               : null,
           toolbarHeight: 64,
+
+          backgroundColor: Theme.of(context).colorScheme.surface,
           shadowColor: Colors.black,
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
           title: showTitle
               ? TextButton(
                   onPressed: () => context.go('/'),
@@ -52,6 +54,29 @@ class TopBar extends StatelessWidget {
               : null,
           actions: [
             Padding(
+                padding: const EdgeInsets.only(
+                  top: 8,
+                  bottom: 8,
+                ),
+                child: (accountId != null)
+                    ? Container(
+                        alignment: AlignmentDirectional.center,
+                        child: Text(
+                          accountId,
+                          maxLines: 1,
+                          style: GoogleFonts.montserrat().copyWith(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
+                      )
+                    : ElevatedButton(
+                        onPressed: () =>
+                            context.read<HomeCubit>().requestAccount(),
+                        style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder()),
+                        child: Text('CONNECT WALLET',
+                            style: GoogleFonts.montserrat()),
+                      )),
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: OutlinedButton(
                 onPressed: () => context.go('/mint'),
@@ -63,30 +88,6 @@ class TopBar extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-                padding: EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
-                  right: MediaQuery.of(context).size.width / 16,
-                ),
-                child: (accountId != null)
-                    ? Container(
-                        alignment: AlignmentDirectional.center,
-                        width: 220,
-                        child: Text(
-                          accountId,
-                          maxLines: 1,
-                          style: GoogleFonts.montserrat(),
-                        ),
-                      )
-                    : ElevatedButton(
-                        onPressed: () =>
-                            context.read<HomeCubit>().requestAccount(),
-                        style: ElevatedButton.styleFrom(
-                            shape: const StadiumBorder()),
-                        child: Text('CONNECT WALLET',
-                            style: GoogleFonts.montserrat()),
-                      )),
           ],
           elevation: 4,
         );

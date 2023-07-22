@@ -20,9 +20,9 @@ class MemeDetailsScreen extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 1.0,
           child: Hero(
-              tag: 'meme0',
+              tag: 'meme${meme.id}',
               child: MemeWidget(
-                meme: Meme(template: MemeTemplate.loool, texts: ['Looooool']),
+                meme: meme,
                 onTap: () => Navigator.pop(context),
               )),
         ),

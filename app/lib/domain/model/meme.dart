@@ -1,13 +1,17 @@
+import 'package:equatable/equatable.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
 
-class Meme {
+class Meme extends Equatable {
   final MemeTemplate template;
   final List<String> texts;
-  String? id;
+  final String? id;
 
-  Meme({
+  const Meme({
     required this.template,
     required this.texts,
     this.id,
   });
+
+  @override
+  List<Object?> get props => [template, texts.join(), id.toString()];
 }

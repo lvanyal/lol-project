@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:lol_app/data/converter/meme_converter.dart';
-import 'package:lol_app/domain/model/blockchain_meme.dart';
 import 'package:lol_app/domain/model/event.dart';
-import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/domain/repository/main_repository.dart';
 import 'package:lol_app/screens/home/home_state.dart';
 
@@ -49,10 +47,10 @@ class HomeCubit extends Cubit<HomeState> {
               totalMemeAmount: event.totalMemes,
             ),
         loaded: (loaded) => loaded.copyWith(
-              loadedMemes: [
+              loadedMemes: {
                 ...loaded.loadedMemes,
                 meme,
-              ],
+              }.toList(),
             ));
 
     emit(newState);

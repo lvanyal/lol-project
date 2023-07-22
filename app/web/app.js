@@ -12,6 +12,7 @@ window._initJsInterop = function (_bridge) {
   bridge.sendFromDart = () => console.log("from dart");
   bridge.requestAccount = requestAccount;
   bridge.fetchAll = fetchAll;
+  bridge.mintMeme = mintMeme;
 };
 
 window.onload = function (e) {
@@ -102,7 +103,28 @@ async function fetchAll() {
     for (let i = 0; i < totalNumber; i++) {
       let memeId = await readContract.tokenByIndex(i);
       let memeUri = await readContract.tokenURI(memeId);
+      console.log("====> contract: " + memeUri);
+
       bridge.onMemeFetched(parseInt(totalNumber), { id: memeId, uri: memeUri });
     }
+  }
+}
+
+async function mintMeme(uri) {
+  try {
+    const tx = await contract.mintMeme(uri);
+    // window.onMemeMint(tx.hash, confirmations)
+    const rc = await tx.wait(confirmations);
+    const logs = await contract.queryFilter(
+      "MemeMinted",
+      rc.blockNumber,
+      rc.blockNumber
+    );
+    const tokenId = parseInt(logs[0].topics[1], 16).toString();
+    const attachedValue = logs[0].topics[2];
+    // window.onMintTxConfirmed(tokenId, attachedValue)
+  } catch (error) {
+    console.error(error);
+    // window.onMintTxFailed(safeStringify(error))
   }
 }

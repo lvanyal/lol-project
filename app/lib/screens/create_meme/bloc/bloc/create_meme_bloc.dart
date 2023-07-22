@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
 import 'dart:math';
+
+import 'package:lol_app/domain/repository/main_repository.dart';
 
 part 'create_meme_event.dart';
 part 'create_meme_state.dart';
 
 class CreateMemeBloc extends Bloc<CreateMemeEvent, CreateMemeState> {
-  CreateMemeBloc()
+  final MainRepository repository;
+
+  CreateMemeBloc(this.repository)
       : super(CreateMemeState(
           selectedTemplate: MemeTemplate.fry,
           texts: MemeTemplate.fry.emptyTextsList,
@@ -25,6 +30,11 @@ class CreateMemeBloc extends Bloc<CreateMemeEvent, CreateMemeState> {
         selectedTemplate: state.selectedTemplate,
         texts: newTexts,
       ));
+    });
+
+    on<CreateMemePressed>((event, emit) {
+      final meme = Meme(template: state.selectedTemplate, texts: state.texts);
+      repository.mintMeme(meme);
     });
   }
 }

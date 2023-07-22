@@ -16,14 +16,17 @@ class Dependencies {
     getIt.registerSingleton(Logger());
 
     /// data
-    getIt.registerSingleton<MainRepository>(MainRepositoryImpl(bridge: bridge));
     getIt.registerSingleton(MemeConverter());
+    getIt.registerSingleton<MainRepository>(MainRepositoryImpl(
+      bridge: bridge,
+      memeConverter: getIt<MemeConverter>(),
+    ));
 
     /// bloc
     getIt.registerFactory(() => HomeCubit(
           getIt<MainRepository>(),
           getIt<MemeConverter>(),
         ));
-    getIt.registerFactory(() => CreateMemeBloc());
+    getIt.registerFactory(() => CreateMemeBloc(getIt<MainRepository>()));
   }
 }
