@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
+import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_state.dart';
 import 'package:lol_app/widget/meme_widget.dart';
 
 class MemePreview extends StatelessWidget {

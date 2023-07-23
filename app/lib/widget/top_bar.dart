@@ -18,6 +18,7 @@ class TopBar extends StatelessWidget {
       builder: (context, state) {
         final accountId = state.mapOrNull(
           loaded: (value) => value.accountId,
+          loading: (value) => value.accountId,
         );
 
         return AppBar(

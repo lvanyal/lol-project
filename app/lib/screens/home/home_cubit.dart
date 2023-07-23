@@ -3,26 +3,26 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:lol_app/data/converter/meme_converter.dart';
 import 'package:lol_app/domain/model/event.dart';
-import 'package:lol_app/domain/repository/main_repository.dart';
+import 'package:lol_app/domain/repository/meme_repository.dart';
 import 'package:lol_app/screens/home/home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final MainRepository _repository;
   final MemeConverter _memeConverter;
-  StreamSubscription? _eventsSubscribtion;
+  StreamSubscription? _eventsSubscription;
 
   HomeCubit(this._repository, this._memeConverter)
-      : super(const HomeState.loading()) {
+      : super(HomeState.loading(accountId: _repository.accountId)) {
     _repository.fetchAll();
 
-    _eventsSubscribtion = _repository.eventStream().listen(_onEvent);
+    _eventsSubscription = _repository.eventStream().listen(_onEvent);
   }
 
   void requestAccount() => _repository.requestAccount();
 
   @override
-  Future<void> close() {
-    _eventsSubscribtion?.cancel();
+  Future<void> close() async {
+    await _eventsSubscription?.cancel();
     return super.close();
   }
 
@@ -45,8 +45,10 @@ class HomeCubit extends Cubit<HomeState> {
         loading: (_) => HomeState.loaded(
               loadedMemes: [meme],
               totalMemeAmount: event.totalMemes,
+              accountId: _repository.accountId,
             ),
         loaded: (loaded) => loaded.copyWith(
+              accountId: _repository.accountId,
               loadedMemes: {
                 ...loaded.loadedMemes,
                 meme,

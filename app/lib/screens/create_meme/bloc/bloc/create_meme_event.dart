@@ -16,3 +16,14 @@ class TextUpdated extends CreateMemeEvent {
 }
 
 class CreateMemePressed extends CreateMemeEvent {}
+
+class SuccessEvent extends CreateMemeEvent {
+  final String text;
+
+  SuccessEvent(this.text);
+}
+class ErrorEvent extends CreateMemeEvent {
+  final String text;
+
+  ErrorEvent(this.text);
+}

@@ -13,6 +13,7 @@ window._initJsInterop = function (_bridge) {
   bridge.requestAccount = requestAccount;
   bridge.fetchAll = fetchAll;
   bridge.mintMeme = mintMeme;
+  bridge.checkConnection = checkConnection;
 };
 
 window.onload = function (e) {
@@ -89,8 +90,9 @@ async function setupContract() {
 }
 
 async function fetchAll() {
-  const address = config[window.ethereum.networkVersion];
-  if (address) {
+  try {
+    const address = config[window.ethereum.networkVersion];
+
     const readProvider = new ethers.JsonRpcProvider("http://127.0.0.1:8545/");
     const readContract = new ethers.Contract(
       address,
@@ -107,13 +109,16 @@ async function fetchAll() {
 
       bridge.onMemeFetched(parseInt(totalNumber), { id: memeId, uri: memeUri });
     }
+  } catch (error) {
+    console.error(error);
+    bridge.onGetAllFailed(safeStringify(error));
   }
 }
 
 async function mintMeme(uri) {
   try {
     const tx = await contract.mintMeme(uri);
-    // window.onMemeMint(tx.hash, confirmations)
+    bridge.onMemeMintSent();
     const rc = await tx.wait(confirmations);
     const logs = await contract.queryFilter(
       "MemeMinted",
@@ -122,9 +127,16 @@ async function mintMeme(uri) {
     );
     const tokenId = parseInt(logs[0].topics[1], 16).toString();
     const attachedValue = logs[0].topics[2];
-    // window.onMintTxConfirmed(tokenId, attachedValue)
+    console.log(safeStringify(attachedValue));
+    bridge.onMintTxConfirmed(tokenId, attachedValue);
   } catch (error) {
     console.error(error);
-    // window.onMintTxFailed(safeStringify(error))
+    bridge.onMintTxFailed(safeStringify(error));
   }
+}
+
+function safeStringify(object) {
+  return JSON.stringify(object, (key, value) =>
+    typeof value === "bigint" ? value.toString() : value
+  );
 }

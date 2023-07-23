@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:lol_app/data/interop/interop_initialiser.dart';
+import 'package:lol_app/data/interop/js_bridge.dart';
 import 'package:lol_app/di/dependencies.dart';
 import 'package:lol_app/domain/model/meme.dart';
 import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
@@ -28,13 +29,19 @@ import 'screens/create_meme/create_meme_screen.dart';
 Dependencies? _dependencies;
 
 void main() {
+  _setup();
+
+  runApp(LolApp());
+}
+
+//varius setups to make the app run
+void _setup() {
   EquatableConfig.stringify = true;
   final bridge = initJsInterop();
+  bridge.checkConnection();
   _dependencies =
       _dependencies ?? (Dependencies()..resolveDependencies(bridge));
   Bloc.observer = StateObserver(logger: getIt<Logger>());
-
-  runApp(LolApp());
 }
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =

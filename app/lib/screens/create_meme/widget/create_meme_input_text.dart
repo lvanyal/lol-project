@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lol_app/domain/model/meme_template.dart';
 import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
+import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_state.dart';
 
 class InputText extends StatefulWidget {
   const InputText({super.key});
@@ -42,7 +43,7 @@ class _InputTextState extends State<InputText> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateMemeBloc, CreateMemeState>(
+    return BlocConsumer<CreateMemeBloc, CreateMemeState>(
       builder: (BuildContext context, state) => Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -57,6 +58,7 @@ class _InputTextState extends State<InputText> {
                         i < state.selectedTemplate.textsCount;
                         i += 1) ...[
                       TextField(
+                        enabled: !state.showProgress,
                         controller: _textControllers[i],
                         decoration: InputDecoration(
                           filled: false,
@@ -77,6 +79,15 @@ class _InputTextState extends State<InputText> {
               );
             },
           )),
+      listener: (BuildContext context, CreateMemeState state) {
+        for (int i = 0; i < state.texts.length; i++) {
+          final currentText = _textControllers[i].text;
+          final newText = state.texts[i];
+          if (currentText != newText) {
+            _textControllers[i].text = newText;
+          }
+        }
+      },
     );
   }
 }

@@ -26,7 +26,11 @@ class MemeConverter {
 
   BlockchainMeme toBlockchain(Meme meme) {
     final uri = Uri(host: HOST, scheme: SCHEME, queryParameters: {
-      textParam: meme.texts.join(uriTextDelimiter),
+      textParam: meme.texts
+          .where(
+            (element) => element.isNotEmpty,
+          )
+          .join(uriTextDelimiter),
       templateIndexParam: MemeTemplate.values.indexOf(meme.template).toString(),
     });
 

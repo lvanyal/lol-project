@@ -6,4 +6,5 @@ abstract interface class MainRepository {
   void requestAccount();
   void fetchAll();
   void mintMeme(Meme meme);
+  String? get accountId;
 }

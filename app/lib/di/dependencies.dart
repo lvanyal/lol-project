@@ -3,7 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:lol_app/data/converter/meme_converter.dart';
 import 'package:lol_app/data/impl/main_repository_impl.dart';
 import 'package:lol_app/data/interop/js_bridge.dart';
-import 'package:lol_app/domain/repository/main_repository.dart';
+import 'package:lol_app/domain/repository/meme_repository.dart';
 import 'package:lol_app/screens/create_meme/bloc/bloc/create_meme_bloc.dart';
 import 'package:lol_app/screens/home/home_cubit.dart';
 
@@ -17,7 +17,7 @@ class Dependencies {
 
     /// data
     getIt.registerSingleton(MemeConverter());
-    getIt.registerSingleton<MainRepository>(MainRepositoryImpl(
+    getIt.registerSingleton<MainRepository>(MemeRepositoryImpl(
       bridge: bridge,
       memeConverter: getIt<MemeConverter>(),
     ));

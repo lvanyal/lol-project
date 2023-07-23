@@ -34,6 +34,26 @@ class TotalMemeCount extends Event {
   }
 }
 
+class MintTransactionSent extends Event {}
+
+class MintTransactionConfirmed extends Event {
+  final String id;
+  final String? payload;
+
+  MintTransactionConfirmed(this.id, this.payload);
+
+  @override
+  String toString() {
+    return 'MemeMinted($id)';
+  }
+}
+
+class MintTransactionFailed extends Event {
+  final String error;
+
+  MintTransactionFailed(this.error);
+}
+
 class MemeFetched extends Event {
   final int totalMemes;
   final BlockchainMeme meme;

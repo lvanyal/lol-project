@@ -16,9 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
+  String? get accountId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(String? accountId) loading,
     required TResult Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)
         loaded,
@@ -26,7 +27,7 @@ mixin _$HomeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(String? accountId)? loading,
     TResult? Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
@@ -34,7 +35,7 @@ mixin _$HomeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(String? accountId)? loading,
     TResult Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
@@ -60,12 +61,18 @@ mixin _$HomeState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HomeStateCopyWith<HomeState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
+  @useResult
+  $Res call({String? accountId});
 }
 
 /// @nodoc
@@ -77,13 +84,30 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? accountId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$HomeLoadingCopyWith<$Res> {
+abstract class _$$HomeLoadingCopyWith<$Res>
+    implements $HomeStateCopyWith<$Res> {
   factory _$$HomeLoadingCopyWith(
           _$HomeLoading value, $Res Function(_$HomeLoading) then) =
       __$$HomeLoadingCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? accountId});
 }
 
 /// @nodoc
@@ -93,66 +117,93 @@ class __$$HomeLoadingCopyWithImpl<$Res>
   __$$HomeLoadingCopyWithImpl(
       _$HomeLoading _value, $Res Function(_$HomeLoading) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? accountId = freezed,
+  }) {
+    return _then(_$HomeLoading(
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
-  const _$HomeLoading();
+  const _$HomeLoading({this.accountId});
+
+  @override
+  final String? accountId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loading()';
+    return 'HomeState.loading(accountId: $accountId)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'HomeState.loading'));
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.loading'))
+      ..add(DiagnosticsProperty('accountId', accountId));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$HomeLoading);
+        (other.runtimeType == runtimeType &&
+            other is _$HomeLoading &&
+            (identical(other.accountId, accountId) ||
+                other.accountId == accountId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, accountId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HomeLoadingCopyWith<_$HomeLoading> get copyWith =>
+      __$$HomeLoadingCopyWithImpl<_$HomeLoading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(String? accountId) loading,
     required TResult Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)
         loaded,
   }) {
-    return loading();
+    return loading(accountId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(String? accountId)? loading,
     TResult? Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
   }) {
-    return loading?.call();
+    return loading?.call(accountId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(String? accountId)? loading,
     TResult Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(accountId);
     }
     return orElse();
   }
@@ -190,14 +241,22 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
 }
 
 abstract class HomeLoading implements HomeState {
-  const factory HomeLoading() = _$HomeLoading;
+  const factory HomeLoading({final String? accountId}) = _$HomeLoading;
+
+  @override
+  String? get accountId;
+  @override
+  @JsonKey(ignore: true)
+  _$$HomeLoadingCopyWith<_$HomeLoading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$HomeLoadedCopyWith<$Res> {
+abstract class _$$HomeLoadedCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   factory _$$HomeLoadedCopyWith(
           _$HomeLoaded value, $Res Function(_$HomeLoaded) then) =
       __$$HomeLoadedCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({String? accountId, int totalMemeAmount, List<Meme> loadedMemes});
 }
@@ -296,7 +355,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(String? accountId) loading,
     required TResult Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)
         loaded,
@@ -307,7 +366,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(String? accountId)? loading,
     TResult? Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
@@ -318,7 +377,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(String? accountId)? loading,
     TResult Function(
             String? accountId, int totalMemeAmount, List<Meme> loadedMemes)?
         loaded,
@@ -368,9 +427,11 @@ abstract class HomeLoaded implements HomeState {
       required final int totalMemeAmount,
       required final List<Meme> loadedMemes}) = _$HomeLoaded;
 
+  @override
   String? get accountId;
   int get totalMemeAmount;
   List<Meme> get loadedMemes;
+  @override
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
       throw _privateConstructorUsedError;

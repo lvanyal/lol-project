@@ -6,7 +6,7 @@ part 'home_state.freezed.dart';
 
 @freezed
 abstract class HomeState with _$HomeState {
-  const factory HomeState.loading() = HomeLoading;
+  const factory HomeState.loading({String? accountId}) = HomeLoading;
   const factory HomeState.loaded(
       {String? accountId,
       required int totalMemeAmount,

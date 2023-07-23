@@ -38,6 +38,21 @@ class LolBridge {
   }
 
   @JSExport()
+  void onMemeMintSent() {
+    events.add(MintTransactionSent());
+  }
+
+  @JSExport()
+  void onMintTxConfirmed(String id, String? payload) {
+    events.add(MintTransactionConfirmed(id, payload));
+  }
+
+  @JSExport()
+  void onMintTxFailed(String error) {
+    events.add(MintTransactionFailed(error));
+  }
+
+  @JSExport()
   void onMemeFetched(int totalMemes, JSMeme meme) {
     events.add(
       MemeFetched(
@@ -54,6 +69,7 @@ class JSLolBridge {}
 
 extension JSExt on JSLolBridge {
   external int value;
+  external void checkConnection();
   external void sendFromDart();
   external void requestAccount();
   external void fetchAll();
